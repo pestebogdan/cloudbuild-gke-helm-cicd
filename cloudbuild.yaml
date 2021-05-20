@@ -1,0 +1,10 @@
+# [START cloudbuild]
+steps:
+- name: 'python:3.7-slim'
+  id: Unit tests
+  entrypoint: /bin/sh
+  args:
+  - -c
+  - |
+      pip install flask
+      python ./app/src/test_app.py
