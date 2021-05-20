@@ -9,6 +9,12 @@ steps:
       pip install flask
       python ./app/src/test_app.py
 
+- name: 'alpine/helm:3.5.4'
+  id: Run helm lint
+  args:
+  - 'lint'
+  - 'charts/simple-helloworld-python-app'
+
 - name: 'gcr.io/cloud-builders/docker'
   id: Build container image
   entrypoint: sh
