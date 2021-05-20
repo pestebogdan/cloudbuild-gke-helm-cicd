@@ -66,6 +66,7 @@ steps:
   - 'cluster-info'
   env:
   - CLOUDSDK_CONTAINER_CLUSTER=$PROJECT_ID-cluster
+  - CLOUDSDK_COMPUTE_REGION=us-central1
   - KUBECONFIG=/workspace/.kube/config
 
 - name: 'gcr.io/$PROJECT_ID/helm'
