@@ -77,7 +77,7 @@ steps:
   - simple-helloworld-python-app
   - ./charts/simple-helloworld-python-app
   - --set
-  - image.repository=gcr.io/$PROJECT_ID/my-app,image.tag=$COMMIT_SHA
+  - image.repository=gcr.io/$PROJECT_ID/my-app,image.tag=$SHORT_SHA
   env:
   - KUBECONFIG=/workspace/.kube/config
 
