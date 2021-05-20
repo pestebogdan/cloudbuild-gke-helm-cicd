@@ -60,6 +60,26 @@ steps:
       cd environments/dev
       terraform apply -auto-approve
 
+- name: gcr.io/cloud-builders/kubectl
+  id: Configure kubectl workspace
+  args:
+  - 'cluster-info'
+  env:
+  - CLOUDSDK_CONTAINER_CLUSTER=$PROJECT_ID-cluster
+  - KUBECONFIG=/workspace/.kube/config
+
+- name: 'gcr.io/$PROJECT_ID/helm'
+  id: Deploy Helm chart with patched new image
+  args:
+  - upgrade
+  - --install
+  - simple-helloworld-python-app
+  - ./charts/simple-helloworld-python-app
+  - --set
+  - image.repository=gcr.io/$PROJECT_ID/my-app,image.tag=$COMMIT_SHA
+  env:
+  - KUBECONFIG=/workspace/.kube/config
+
 # [END Deployment Phase]
 
 # [END cloudbuild]
