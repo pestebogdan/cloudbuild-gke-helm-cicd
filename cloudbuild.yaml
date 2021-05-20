@@ -1,4 +1,7 @@
 # [START cloudbuild]
+
+# [START Test Phase]
+
 steps:
 - name: 'python:3.7-slim'
   id: Run unit tests on the app
@@ -15,6 +18,16 @@ steps:
   - 'lint'
   - 'charts/simple-helloworld-python-app'
 
+- name: 'hashicorp/terraform:0.15.4'
+  id: Run terraform tests
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - |
+      cd environments/dev
+      terraform init
+      terraform plan
+
 - name: 'gcr.io/cloud-builders/docker'
   id: Build container image
   entrypoint: sh
@@ -29,5 +42,10 @@ steps:
   args:
   - 'push'
   - 'gcr.io/$PROJECT_ID/simple-flask-helloworld-app:$SHORT_SHA'
+# [END Build and test Phase]
+
+# [START Deployment Phase]
+
+# [END Deployment Phase]
 
 # [END cloudbuild]
