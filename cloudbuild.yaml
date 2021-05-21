@@ -73,6 +73,10 @@ steps:
   id: Create namespace for this CICD build
   args: ['create','namespace','cicd-$BUILD_ID']
   waitFor: ['-'] # start immediately
+  env:
+  - CLOUDSDK_CONTAINER_CLUSTER=$PROJECT_ID-cluster
+  - CLOUDSDK_COMPUTE_REGION=us-central1
+  - KUBECONFIG=/workspace/.kube/config
 
 - name: 'gcr.io/$PROJECT_ID/helm'
   id: Deploy Helm chart with patched new image
