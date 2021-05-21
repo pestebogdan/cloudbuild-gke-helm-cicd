@@ -81,15 +81,13 @@ steps:
 - name: 'alpine/helm:3.5.4'
   id: Run Helm install
   args:
+  - -n cicd-$BUILD_ID
   - upgrade
   - --install
   - simple-helloworld-python-app
   - ./charts/simple-helloworld-python-app
   - --set
   - image.repository=gcr.io/$PROJECT_ID/simple-flask-helloworld-app,image.tag=$SHORT_SHA
-  - -n cicd-$BUILD_ID
-  waitFor:
-  - Create namespace for this CICD build
   env:
   - KUBECONFIG=/workspace/.kube/config 
 
