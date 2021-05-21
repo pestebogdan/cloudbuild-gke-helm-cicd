@@ -81,13 +81,13 @@ steps:
 - name: 'gcr.io/$PROJECT_ID/helm'
   id: Deploy Helm chart with patched new image
   args:
-  - --namespace cicd-$BUILD_ID
   - upgrade
   - --install
   - simple-helloworld-python-app
   - ./charts/simple-helloworld-python-app
   - --set
   - image.repository=gcr.io/$PROJECT_ID/simple-flask-helloworld-app,image.tag=$SHORT_SHA
+  - -n cicd-$BUILD_ID
   env:
   - KUBECONFIG=/workspace/.kube/config
 
