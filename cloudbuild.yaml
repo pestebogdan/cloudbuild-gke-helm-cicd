@@ -78,8 +78,8 @@ steps:
   - CLOUDSDK_COMPUTE_REGION=us-central1
   - KUBECONFIG=/workspace/.kube/config
 
-- name: 'gcr.io/$PROJECT_ID/helm'
-  id: Deploy Helm chart with patched new image
+- name: 'alpine/helm:3.5.4'
+  id: Run Helm install
   args:
   - upgrade
   - --install
@@ -88,8 +88,23 @@ steps:
   - --set
   - image.repository=gcr.io/$PROJECT_ID/simple-flask-helloworld-app,image.tag=$SHORT_SHA
   - -n cicd-$BUILD_ID
+  waitFor:
+  - Create namespace for this CICD build
   env:
-  - KUBECONFIG=/workspace/.kube/config
+  - KUBECONFIG=/workspace/.kube/config 
+
+# - name: 'gcr.io/$PROJECT_ID/helm'
+#   id: Deploy Helm chart with patched new image
+#   args:
+#   - upgrade
+  # - --install
+  # - simple-helloworld-python-app
+  # - ./charts/simple-helloworld-python-app
+  # - --set
+  # - image.repository=gcr.io/$PROJECT_ID/simple-flask-helloworld-app,image.tag=$SHORT_SHA
+  # - -n cicd-$BUILD_ID
+#   env:
+#   - KUBECONFIG=/workspace/.kube/config
 
 # [END Deployment Phase]
 
