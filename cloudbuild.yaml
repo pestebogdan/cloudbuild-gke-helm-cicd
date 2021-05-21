@@ -83,4 +83,19 @@ steps:
 
 # [END Deployment Phase]
 
+# [BEGIN Cleanup Phase]
+- name: 'hashicorp/terraform:0.15.4'
+  id: Destroy environment
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - |
+      if [ ${_TF_DESTROY} = true ]; then
+        cd environments/dev
+        terraform destroy -auto-approve
+      else
+        echo "### Skipping ### "
+      fi
+# [END Cleanup Phase]
+
 # [END cloudbuild]
