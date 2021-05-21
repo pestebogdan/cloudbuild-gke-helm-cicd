@@ -80,14 +80,12 @@ steps:
 
 - name: 'alpine/helm:3.5.4'
   id: Run Helm install
+  entrypoint: 'sh'
   args:
-  - -n cicd-$BUILD_ID
-  - upgrade
-  - --install
-  - simple-helloworld-python-app
-  - ./charts/simple-helloworld-python-app
-  - --set
-  - image.repository=gcr.io/$PROJECT_ID/simple-flask-helloworld-app,image.tag=$SHORT_SHA
+  - '-c'
+  - |
+      helm version
+      helm -n cicd-$BUILD_ID upgrade --install simple-helloworld-python-app ./charts/simple-helloworld-python-app --set image.repository=gcr.io/$PROJECT_ID/simple-flask-helloworld-app,image.tag=$SHORT_SHA
   env:
   - KUBECONFIG=/workspace/.kube/config 
 
