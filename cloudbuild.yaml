@@ -69,9 +69,15 @@ steps:
   - CLOUDSDK_COMPUTE_REGION=us-central1
   - KUBECONFIG=/workspace/.kube/config
 
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: Create namespace for this CICD build
+  args: ['create','namespace','cicd-$BUILD_ID']
+  waitFor: ['-'] # start immediately
+
 - name: 'gcr.io/$PROJECT_ID/helm'
   id: Deploy Helm chart with patched new image
   args:
+  - --namespace cicd-$BUILD_ID
   - upgrade
   - --install
   - simple-helloworld-python-app
