@@ -9,8 +9,9 @@ steps:
   args:
   - -c
   - |
-      pip install flask pytest
-      pytest app/src/
+      pip install flask pytest coverage pytest-coverage
+      cd app/src/
+      pytest --cov=.
 
 - name: 'alpine/helm:3.5.4'
   id: Run helm lint
