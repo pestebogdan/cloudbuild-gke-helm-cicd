@@ -10,7 +10,7 @@ steps:
   - -c
   - |
       pip install flask pytest
-      pytest /app/src/
+      pytest app/src/
 
 - name: 'alpine/helm:3.5.4'
   id: Run helm lint
