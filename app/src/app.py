@@ -20,6 +20,10 @@ app = Flask('hello-cloudbuild')
 def hello():
   return "Hello Bogdan v2!\n"
 
+@app.route('/bye')
+def goodbye():
+  return "Goodbye Bogdan!\n"
+
 if __name__ == '__main__':
   app.run(host = '0.0.0.0', port = 80)
 # [END hello-app]
