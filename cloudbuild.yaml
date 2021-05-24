@@ -9,6 +9,7 @@ steps:
   args:
   - -c
   - |
+      pwd
       pip install flask pytest coverage pytest-coverage
       cd app/src/
       pytest --cov=.
@@ -25,6 +26,7 @@ steps:
   args:
   - '-c'
   - |
+      pwd
       cd environments/dev
       terraform init || exit 1
       terraform plan || exit 1
