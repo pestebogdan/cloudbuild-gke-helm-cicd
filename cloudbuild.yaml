@@ -27,6 +27,7 @@ steps:
   - '-c'
   - |
       pwd
+      ls -la
       cd environments/dev
       terraform init || exit 1
       terraform plan || exit 1
@@ -60,6 +61,7 @@ steps:
   args:
   - '-c'
   - |
+      ls -la
       cd environments/dev
       terraform apply -auto-approve
 
