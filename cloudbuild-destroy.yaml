@@ -1,3 +1,4 @@
+steps:
 # [BEGIN Cleanup Phase]
 - name: 'hashicorp/terraform:0.15.4'
   id: Destroy environment
