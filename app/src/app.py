@@ -24,6 +24,10 @@ def hello():
 def goodbye():
   return "Goodbye Bogdan!\n"
 
+@app.route('/florin')
+def goodbye():
+  return "Hello Florin!\n"
+
 if __name__ == '__main__':
   app.run(host = '0.0.0.0', port = 80)
 # [END hello-app]
