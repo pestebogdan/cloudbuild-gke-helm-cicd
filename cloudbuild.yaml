@@ -74,7 +74,6 @@ steps:
 - name: 'gcr.io/cloud-builders/kubectl'
   id: Create namespace for this CICD build
   args: ['create','namespace','cicd-$BUILD_ID']
-  waitFor: ['-'] # start immediately
   env:
   - CLOUDSDK_CONTAINER_CLUSTER=$PROJECT_ID-cluster
   - CLOUDSDK_COMPUTE_REGION=us-central1
