@@ -25,7 +25,7 @@ def goodbye():
   return "Goodbye Bogdan!\n"
 
 @app.route('/florin')
-def goodbye():
+def florin():
   return "Hello Florin!\n"
 
 if __name__ == '__main__':
